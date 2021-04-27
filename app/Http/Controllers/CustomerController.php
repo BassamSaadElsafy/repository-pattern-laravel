@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Repositories\CustomerRepositoryInterface;
+
+use App\contracts\CustomerRepositoryInterface;
+
 class CustomerController extends Controller
 {
 
@@ -15,14 +17,13 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = $this->customerRepository->all();
-        return [ 'code' => 200, 'error' => null, 'data' => $customers ];
+        return ['code' => 200, 'error' => null, 'data' => $customers];
     }
 
     public function show($customeId)
     {
 
         return $this->customerRepository->getById($customeId);
-
     }
 
     public function update($customerId)
@@ -35,11 +36,10 @@ class CustomerController extends Controller
     {
         $is_deleted = $this->customerRepository->delete($customerId);
 
-        if($is_deleted){
+        if ($is_deleted) {
 
             return ['message' => 'Customer deleted successfully', 'code' => 203];
         }
         return ['message' => 'Customer Not Found', 'code' => 404];
     }
-
 }

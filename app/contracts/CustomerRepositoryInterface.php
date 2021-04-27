@@ -1,5 +1,6 @@
 <?php
-namespace App\Repositories;
+
+namespace App\contracts;
 
 interface CustomerRepositoryInterface
 {

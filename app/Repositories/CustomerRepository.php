@@ -3,17 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Customer;
+use App\contracts\CustomerRepositoryInterface;
 
-class CustomerRepository implements CustomerRepositoryInterface{
+class CustomerRepository implements CustomerRepositoryInterface
+{
 
     public function all()
     {
 
         return Customer::orderBy('name')
-        ->where('active', 1)
-        ->with('user')
-        ->get()
-        ->map->format();
+            ->where('active', 1)
+            ->with('user')
+            ->get()
+            ->map->format();
 
         //Or
 
@@ -30,10 +32,10 @@ class CustomerRepository implements CustomerRepositoryInterface{
     public function getById($customer_id)
     {
         return Customer::where('id', $customer_id)
-        ->where('active', 1)
-        ->with('user')
-        ->firstOrFail()
-        ->format();                    //which is created in customer model
+            ->where('active', 1)
+            ->with('user')
+            ->firstOrFail()
+            ->format();                    //which is created in customer model
     }
 
     public function update($customerId)
@@ -46,5 +48,4 @@ class CustomerRepository implements CustomerRepositoryInterface{
     {
         return Customer::where('id', $customerId)->delete();            //existed ==> 1 ,  not found ==> 0
     }
-
 }
